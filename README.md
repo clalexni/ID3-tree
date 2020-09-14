@@ -1,6 +1,8 @@
 # ID3-tree
 ### Goal 
-build ID3 decision tree
+- build ID3 decision tree
+- produce accuracy
+- plot learning curve
 
 ### Requirements:
 - Python3.6
