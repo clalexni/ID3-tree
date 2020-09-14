@@ -2,6 +2,11 @@
 ### Goal 
 build ID3 decision tree
 
+### Requirements:
+- Python3.6
+- data file (path)
+- command line: (take two inputs of path to the data file)
+  ./id3_tree.py data/test.dat data/train/dat
 ### Some rule descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
 different classes, then choose the most frequent class (among the instances at the leaf node). 
