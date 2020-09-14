@@ -14,6 +14,8 @@
     the first input is the training set and the second input should be the test set
 ~~~
 chmod u+x id3_tree.py
+~~~
+~~~
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
 ### Some rule descriptions
