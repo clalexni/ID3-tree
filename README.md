@@ -7,7 +7,7 @@ build ID3 decision tree
 - data file (path)
 - command line: (take two inputs of path to the data file)
 ~~~
-./id3_tree.py data/test.dat data/train/dat
+./id3_tree.py data/train.dat data/test.dat
 ~~~
 ### Some rule descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
