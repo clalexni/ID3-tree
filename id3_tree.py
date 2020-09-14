@@ -42,6 +42,42 @@ class DataSet:
         classes.append(item)
     return min(classes)
     
+class LeafNode:
+  """leaf node holds the result(class)"""
+  def __init__(self, result):
+    self.result = result
+
+  def __call__(self, example):
+    """
+    Given an example, return class result.
+    use this call function recurrsively with Internal node call function
+    """
+    return self.result
+
+  def __repr__(self):
+    return repr(self.result)
+
+class InternalNode:
+  """
+  Internal node(fork) holds attribute to test and a dict of branches.
+  Each branch corresponds to an attribute value label
+  """
+  def __init__(self, attr, attr_name=None, branches=None):
+    self.attr = attr
+    self.attr_name = attr_name or attr
+    self.branches = branches or {}
+  
+  def __call__(self, example):
+    """Given an example, recurrsivly call internal node function to get class result"""
+    attr_value = example[self.attr]
+    if attr_value in self.branches:
+      return branches[attr_value](exmaple)
+
+  def add(self, value, subtree):
+    """"""
+
+
+
 
 def parse_data(input_file):
   """ 
@@ -52,22 +88,6 @@ def parse_data(input_file):
     col_names = data[0].split()
     examples = [line.split() for line in islice(data, 1, len(data))]
     return col_names, examples
-
-class LeafNode:
-  """leaf node holds the result(class)"""
-  def __init__(self, result):
-    self.result = result
-
-  def __repr__(self):
-    return repr(self.result)
-
-class InternalNode:
-   """
-   Internal node(fork) holds attribute to test and a dict of branches.
-   Each branch corresponds to an attribute value label
-   """
-
-
 
 if __name__ == '__main__':
   training_file = sys.argv[1]
