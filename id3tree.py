@@ -53,12 +53,7 @@ def parse_data(input_file):
     examples = [line.split() for line in islice(data, 1, len(data))]
     return col_names, examples
 
-def main():
-  # read 2 argument, training and test file
-  if len(sys.argv) != 3:
-    print(sys.argv[0], ": takes 2 arguments")
-    sys.exit()
-
+if __name__ == '__main__':
   training_file = sys.argv[1]
   test_file = sys.argv[2]
 
@@ -70,5 +65,3 @@ def main():
   #print(ds.attr_indices)
   #print(len(ds.examples))
   #print(ds.most_frequent_class())
-
-main()
