@@ -80,7 +80,8 @@ def id3_tree_learner(dataset):
   """
   most_frequent_class = dataset.most_frequent_class()
 
-  def ids_tree_learning(examples, attr_indices, parent_examples=()):
+  def id3_tree_learning(examples, attr_indices):
+    """id3 decision tree algorithm"""
     if len(examples) == 0:
       return LeafNode(most_frequent_class(dataset.examples)[1])
     elif len(attr_indices) == 0:
@@ -94,11 +95,10 @@ def id3_tree_learner(dataset):
     else:
       A = choose_attribute(attr_indices, examples) #TODO
       tree = InternalNode(A, dataset.col_name[A])
-
-
-
-      
-        
+      for (attr_value, exs) in split_by(A, examples): #TODO
+        subtree = id3_tree_learning(exs, trim_attr(A, attr_indices)) #TODO
+        tree.add(attr_value, subtree)
+      return tree
       
   def most_frequent_class(examples):
     """
@@ -122,7 +122,9 @@ def id3_tree_learner(dataset):
     class0 = exmaples[0][-1]
     return all(ex[-1] == class0 for ex in exmaples)
 
-  return ids_tree_learning(dataset.exmaples, dataset.attr_indices)
+  #def choose_attribute(A, examples):
+
+  return ids_tree_learning(dataset.exmaples, dataset.attr_indices) # id3 algorithm input
     
 
 def parse_data(input_file):
