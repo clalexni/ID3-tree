@@ -6,7 +6,7 @@ from itertools import islice
 class DataSet:
   """
   dataset fields:
-  d.exmaples      An example matrix. It is basically a list of examples, 
+  d.examples      An example matrix. It is basically a list of examples, 
                   each example is a list of attribute values + class value
   d.col_indices   A list of indices that is corresponded to a column of the 
                   examples matrix
@@ -71,15 +71,13 @@ class InternalNode:
     self.branches_dict[attr_value] = subtree
   
   def __repr__(self):
-    return self.attr_name + ': ' self.attr
+    return self.attr_name + ': ' + self.attr
 
 
 def id3_tree_learner(dataset):
   """
   return id3_tree_learning result
   """
-  most_frequent_class = dataset.most_frequent_class()
-
   def id3_tree_learning(examples, attr_indices):
     """id3 decision tree algorithm"""
     if len(examples) == 0:
@@ -94,7 +92,7 @@ def id3_tree_learner(dataset):
       return LeafNode(examples[0][-1])
     else:
       A = choose_attribute(attr_indices, examples) #TODO
-      tree = InternalNode(A, dataset.col_name[A])
+      tree = InternalNode(A, dataset.col_names[A])
       for (attr_value, exs) in split_by(A, examples):
         subtree = id3_tree_learning(exs, trim_item(A, attr_indices))
         tree.add(attr_value, subtree)
@@ -118,11 +116,11 @@ def id3_tree_learner(dataset):
     return classes, min(classes)
 
   def all_same_class(examples):
-    """are all exmaples having the same class value?"""
-    class0 = exmaples[0][-1]
-    return all(ex[-1] == class0 for ex in exmaples)
+    """are all examples having the same class value?"""
+    class0 = examples[0][-1]
+    return all(ex[-1] == class0 for ex in examples)
 
-  def split_by(attr_index, exmaples):
+  def split_by(attr_index, examples):
     """ 
     split examples by a specific attribute
     return a list of (attr_value, examples) pairs
@@ -164,11 +162,11 @@ def id3_tree_learner(dataset):
   def remainder_entropy(attr_index, examples):
     """ return children's average entropy based on a split by a specific attribute"""
     remainder_entropy = 0
-    for (v, exs) in split_by(attr_index, exmaples):
+    for (v, exs) in split_by(attr_index, examples):
       remainder_entropy = remainder_entropy + (len(exs)/len(examples)) * entropy(exs)
     return remainder_entropy
 
-  return ids_tree_learning(dataset.exmaples, dataset.attr_indices) # id3 algorithm input
+  return id3_tree_learning(dataset.examples, dataset.attr_indices) # id3 algorithm input
     
 
 def parse_data(input_file):
@@ -187,9 +185,7 @@ if __name__ == '__main__':
 
   col_names, examples = parse_data(training_file)
   ds_train = DataSet(examples, col_names)
+  id3_tree_learner(ds_train)
 
-  #print(ds.col_values)
-  #print(ds.col_names)
-  #print(ds.col_indices)
-  #print(ds.attr_indices)
-  #print(len(ds.examples))
+
+
