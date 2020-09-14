@@ -12,4 +12,4 @@ class 1 and preferring class 1 to class 2. Do not implement pruning.
 3. A word on tie breaking: when choosing attributes using information again, if two or more
 attributes achieve the highest information gain value, break ties by choosing the earliest one in
 the list of attributes (assuming that the attributes in the first line of a training file are read in a
-left-to-right manner).
+left-to-right manner)
