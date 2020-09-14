@@ -2,7 +2,7 @@
 ### Goal 
 build ID3 decision tree
 
-### Some rules
+### Some rule descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
 different classes, then choose the most frequent class (among the instances at the leaf node). 
 2. If you reach a leaf node in the decision tree and have no examples left or the examples are equally split
@@ -13,3 +13,16 @@ class 1 and preferring class 1 to class 2. Do not implement pruning.
 attributes achieve the highest information gain value, break ties by choosing the earliest one in
 the list of attributes (assuming that the attributes in the first line of a training file are read in a
 left-to-right manner)
+
+### Terminal Criterias
+1. exmaples have same class:
+  - Done
+2. no example left: (meaning there are unused attribute)
+  - select most frequent class of the entire dataset
+3. no attribute left:
+  - choose the most frequent class of the subset at the leaf node
+    - If classes are equally common at subset, select from the entire dataset
+
+* If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
+
+

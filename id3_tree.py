@@ -6,7 +6,6 @@ from itertools import islice
 class DataSet:
   """
   dataset fields:
-
   d.exmaples      An example matrix. It is basically a list of examples, 
                   each example is a list of attribute values + class value
   d.col_indices   A list of indices that is corresponded to a column of the 
@@ -59,24 +58,36 @@ class LeafNode:
 
 class InternalNode:
   """
-  Internal node(fork) holds attribute to test and a dict of branches.
-  Each branch corresponds to an attribute value label
+  fields:
+  attr        attribute to test (column number)
+  attr_name   attribute's name
+  branches    dictionary that hold every value of the attribute
+              attribute value is key and subtree(Internal node or leaf node)
+              is the value
   """
-  def __init__(self, attr, attr_name=None, branches=None):
+  def __init__(self, attr, attr_name=None, branches_dict=None):
     self.attr = attr
     self.attr_name = attr_name or attr
-    self.branches = branches or {}
+    self.branches_dict = branches_dict or {}
   
   def __call__(self, example):
-    """Given an example, recurrsivly call internal node function to get class result"""
+    """
+    Given an example, 
+    recurrsivly call internal node function to get class result
+    """
     attr_value = example[self.attr]
-    if attr_value in self.branches:
-      return branches[attr_value](exmaple)
+    if attr_value in self.branches_dict:
+      return branches_dict[attr_value](exmaple)
 
-  def add(self, value, subtree):
-    """"""
+  def add(self, attr_value, subtree):
+    """add subtree as branch"""
+    self.branches_dict[attr_value] = subtree
+  
+  def __repr__(self):
+    return self.attr_name + ': ' self.attr
 
-
+def id3_tree(dataset):
+  
 
 
 def parse_data(input_file):
