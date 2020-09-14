@@ -26,11 +26,11 @@ left-to-right manner)
   - Done
 2. no example left: (meaning there are unused attribute)
   - select most frequent class of the entire dataset
+    - If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
 3. no attribute left:
   - choose the most frequent class of the subset at the leaf node
     - If classes are equally common at subset, select from the entire dataset
-
-Note: If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
+      - If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
 
 
 
