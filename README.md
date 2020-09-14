@@ -1,4 +1,4 @@
-# ID3-tree
+# id3-tree
 ### Goal 
 - build ID3 decision tree
 - produce accuracy
