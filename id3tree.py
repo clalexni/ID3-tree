@@ -25,6 +25,24 @@ class DataSet:
     #def unique(numbers):
     #  return set(numbers)
 
+  def most_frequent_class(self):
+    """
+    return most frequent class,
+    if frequency are the same, break tie by choosing class0 > class1 > class2
+    """
+    dict = {}
+    max_frequency, classes = 0, []
+    for item in [ex[-1] for ex in self.examples]:
+      dict[item] = dict.get(item, 0) + 1
+      if dict[item] > max_frequency:
+        max_frequency = dict[item]
+        classes.clear()
+        classes.append(item)
+      elif dict[item] == max_frequency:
+        classes.append(item)
+    return min(classes)
+    
+
 def parse_data(input_file):
   """ 
   return a list of column names and an examples matrix
@@ -46,10 +64,11 @@ def main():
 
   col_names, examples = parse_data(training_file)
   ds = DataSet(examples, col_names)
-  print(ds.col_values)
+  #print(ds.col_values)
   #print(ds.col_names)
   #print(ds.col_indices)
   #print(ds.attr_indices)
-
+  #print(len(ds.examples))
+  #print(ds.most_frequent_class())
 
 main()
