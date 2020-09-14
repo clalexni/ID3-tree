@@ -23,6 +23,7 @@ left-to-right manner)
   - choose the most frequent class of the subset at the leaf node
     - If classes are equally common at subset, select from the entire dataset
 
-* If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
+Note: If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
+
 
 
