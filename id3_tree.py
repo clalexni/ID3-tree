@@ -53,6 +53,22 @@ def parse_data(input_file):
     examples = [line.split() for line in islice(data, 1, len(data))]
     return col_names, examples
 
+class LeafNode:
+  """leaf node holds the result(class)"""
+  def __init__(self, result):
+    self.result = result
+
+  def __repr__(self):
+    return repr(self.result)
+
+class InternalNode:
+   """
+   Internal node(fork) holds attribute to test and a dict of branches.
+   Each branch corresponds to an attribute value label
+   """
+
+
+
 if __name__ == '__main__':
   training_file = sys.argv[1]
   test_file = sys.argv[2]
