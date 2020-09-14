@@ -95,8 +95,8 @@ def id3_tree_learner(dataset):
     else:
       A = choose_attribute(attr_indices, examples) #TODO
       tree = InternalNode(A, dataset.col_name[A])
-      for (attr_value, exs) in split_by(A, examples): #TODO
-        subtree = id3_tree_learning(exs, trim_attr(A, attr_indices)) #TODO
+      for (attr_value, exs) in split_by(A, examples):
+        subtree = id3_tree_learning(exs, trim_item(A, attr_indices))
         tree.add(attr_value, subtree)
       return tree
       
@@ -115,14 +115,58 @@ def id3_tree_learner(dataset):
         classes.append(item)
       elif dict[item] == max_frequency:
         classes.append(item)
-    return classes, min(classes)A
+    return classes, min(classes)
 
   def all_same_class(examples):
     """are all exmaples having the same class value?"""
     class0 = exmaples[0][-1]
     return all(ex[-1] == class0 for ex in exmaples)
 
-  #def choose_attribute(A, examples):
+  def split_by(attr_index, exmaples):
+    """ 
+    split examples by a specific attribute
+    return a list of (attr_value, examples) pairs
+    the examples in each pair have the same attribute value
+    given an attribute index
+    """
+    return [(v, [ex for ex in examples if ex[attr_index] == v])
+            for v in dataset.col_values[attr_index]]
+
+  def trim_item(item, List):
+    """return the List but all the occurance of item are trimmed"""
+    return [i for i in List if i != item]
+
+  def choose_attribute(attr_indices, examples):
+    """ 
+    return attribute that yield highest information gain
+    break tie by choosing the left-most attribute index
+    """
+    max_ig, indices = 0, []
+    for index in attr_indices:
+      ig = entropy(examples) - remainder_entropy(index, examples)
+      if ig > max_ig:
+        max_ig = ig
+        indices.clear()
+        indices.append(index)
+      elif ig == max_ig:
+        indices.append(index)
+    return min(indices)
+
+  def entropy(examples):
+    """return entropy value of examples"""
+    dict = {}
+    for item in [ex[-1] for ex in examples]:
+      dict[item] = dict.get(item, 0) + 1
+    entropy = sum(-(val/len(examples))*math.log2(val/len(examples))
+                  for val in dict.values())
+    return entropy
+
+  def remainder_entropy(attr_index, examples):
+    """ return children's average entropy based on a split by a specific attribute"""
+    remainder_entropy = 0
+    for (v, exs) in split_by(attr_index, exmaples):
+      remainder_entropy = remainder_entropy + (len(exs)/len(examples)) * entropy(exs)
+    return remainder_entropy
 
   return ids_tree_learning(dataset.exmaples, dataset.attr_indices) # id3 algorithm input
     
@@ -142,7 +186,8 @@ if __name__ == '__main__':
   test_file = sys.argv[2]
 
   col_names, examples = parse_data(training_file)
-  ds = DataSet(examples, col_names)
+  ds_train = DataSet(examples, col_names)
+
   #print(ds.col_values)
   #print(ds.col_names)
   #print(ds.col_indices)
