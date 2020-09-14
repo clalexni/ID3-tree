@@ -6,7 +6,9 @@ build ID3 decision tree
 - Python3.6
 - data file (path)
 - command line: (take two inputs of path to the data file)
+  - run these two lines to ensure the correct python version
 ~~~
+chmod u+x id3_tree.py
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
 ### Some rule descriptions
