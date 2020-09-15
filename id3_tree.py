@@ -40,7 +40,7 @@ class LeafNode:
     return self.result
 
   def __repr__(self):
-    return repr(self.result)
+    return repr(int(self.result))
 
 
 class InternalNode:
@@ -64,14 +64,14 @@ class InternalNode:
     """
     attr_value = example[self.attr]
     if attr_value in self.branches_dict:
-      return branches_dict[attr_value](exmaple)
+      return self.branches_dict[attr_value](example)
 
   def add(self, attr_value, subtree):
     """add subtree as branch"""
     self.branches_dict[attr_value] = subtree
   
   def __repr__(self):
-    return self.attr_name + ': ' + self.attr
+    return self.attr_name
 
 
 def id3_tree_learner(dataset):
@@ -91,7 +91,7 @@ def id3_tree_learner(dataset):
     elif all_same_class(examples):
       return LeafNode(examples[0][-1])
     else:
-      A = choose_attribute(attr_indices, examples) #TODO
+      A = choose_attribute(attr_indices, examples)
       tree = InternalNode(A, dataset.col_names[A])
       for (attr_value, exs) in split_by(A, examples):
         subtree = id3_tree_learning(exs, trim_item(A, attr_indices))
@@ -167,7 +167,7 @@ def id3_tree_learner(dataset):
     return remainder_entropy
 
   return id3_tree_learning(dataset.examples, dataset.attr_indices) # id3 algorithm input
-    
+
 
 def parse_data(input_file):
   """ 
@@ -179,13 +179,32 @@ def parse_data(input_file):
     examples = [line.split() for line in islice(data, 1, len(data))]
     return col_names, examples
 
+def stdout(tree):
+  """print tree recursively"""
+  def print_tree(tree, level):
+    if isinstance(tree, LeafNode):
+      print(' ', tree, end='')
+      return 1
+    else:
+      print()
+      for branch in sorted(tree.branches_dict.keys()):
+        print('| ' * level, end='')
+        print(tree, '= ', int(branch), ':', end='')
+        val = print_tree(tree.branches_dict[branch], level + 1)
+        if val == 1:
+          print()
+  print_tree(tree, 0)
+
+
 if __name__ == '__main__':
   training_file = sys.argv[1]
   test_file = sys.argv[2]
 
   col_names, examples = parse_data(training_file)
   ds_train = DataSet(examples, col_names)
-  id3_tree_learner(ds_train)
+  tree = id3_tree_learner(ds_train)
+  stdout(tree)
+
 
 
 
