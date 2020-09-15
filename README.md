@@ -5,7 +5,7 @@
 - plot learning curve
 
 ### Requirements:
-- Python3.6
+- Install Python 3.6
 - data file (path) for inputs training and test set
 - command line: 
   - run these two lines to ensure the correct python version
@@ -23,7 +23,7 @@ chmod u+x id3_tree.py
 ~~~
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
-  - use the following command to redirect output
+  - use the following command to redirect output, for example:
 ~~~
 ./id3_tree.py data/train.dat data/test.dat > out.txt
 ~~~
