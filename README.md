@@ -28,6 +28,9 @@ chmod u+x id3_tree.py
 ./id3_tree.py data/train.dat data/test.dat > out.txt
 ~~~
 - tested on macos/Linux
+
+### Learning Curve:
+![Learning Curve](/outputs/learn.png)
 ### Some rule descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
 different classes, then choose the most frequent class (among the instances at the leaf node). 
