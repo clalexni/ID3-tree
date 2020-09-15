@@ -176,3 +176,21 @@ tea =  2 :  2
 
 Accuracy on training set (800 instances): 89.38%
 Accuracy on test set (203 instances): 87.19%
+
+Learning Curve: (accuracy on test set)
+Sample size:  50 ;   Accuracy:  70.44%
+Sample size:  100 ;   Accuracy:  78.33%
+Sample size:  150 ;   Accuracy:  82.27%
+Sample size:  200 ;   Accuracy:  78.82%
+Sample size:  250 ;   Accuracy:  83.25%
+Sample size:  300 ;   Accuracy:  81.77%
+Sample size:  350 ;   Accuracy:  87.19%
+Sample size:  400 ;   Accuracy:  84.73%
+Sample size:  450 ;   Accuracy:  85.22%
+Sample size:  500 ;   Accuracy:  87.19%
+Sample size:  550 ;   Accuracy:  85.22%
+Sample size:  600 ;   Accuracy:  85.22%
+Sample size:  650 ;   Accuracy:  87.19%
+Sample size:  700 ;   Accuracy:  85.22%
+Sample size:  750 ;   Accuracy:  87.19%
+Sample size:  800 ;   Accuracy:  87.19%

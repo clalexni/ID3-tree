@@ -458,3 +458,9 @@ A1 =  2 :
 
 Accuracy on training set (400 instances): 99.75%
 Accuracy on test set (100 instances): 100.00%
+
+Learning Curve: (accuracy on test set)
+Sample size:  100 ;   Accuracy:  52.00%
+Sample size:  200 ;   Accuracy:  60.00%
+Sample size:  300 ;   Accuracy:  86.00%
+Sample size:  400 ;   Accuracy:  100.00%

@@ -2,6 +2,7 @@
 import sys
 import math
 from itertools import islice
+import random
 
 class DataSet:
   """
@@ -198,7 +199,7 @@ def stdout(tree):
 def accuracy_test(tree, test_examples):
   """test the accuracy of the tree on the test_examples"""
   count = 0
-  for ex in examples:
+  for ex in test_examples:
     if tree(ex) == ex[-1]:
       count = count + 1
   return count/len(test_examples)
@@ -217,6 +218,17 @@ if __name__ == '__main__':
         '{:.2%}'.format(accuracy_test(tree, examples)), sep='')
 
 
-  col_names, examples = parse_data(test_file)
-  print('Accuracy on test set (', len(examples), ' instances): ',
-        '{:.2%}'.format(accuracy_test(tree, examples)), sep='')
+  col_names, test_examples = parse_data(test_file)
+
+  print('Accuracy on test set (', len(test_examples), ' instances): ',
+        '{:.2%}'.format(accuracy_test(tree, test_examples)), sep='')
+
+  print('\nLearning Curve: (accuracy on test set)')
+  for i in range(50, len(examples)+1, 50):
+    sample = random.sample(examples, i)
+    ds_sample = DataSet(sample, col_names)
+    tree_sample = id3_tree_learner(ds_sample)
+    print('Sample size: ', len(sample), '; ', 
+          ' Accuracy: ', '{:.2%}'.format(accuracy_test(tree_sample, test_examples)))
+
+

@@ -857,3 +857,13 @@ wesley =  2 :
 
 Accuracy on training set (800 instances): 73.12%
 Accuracy on test set (203 instances): 75.37%
+
+Learning Curve: (accuracy on test set)
+Sample size:  100 ;   Accuracy:  37.44%
+Sample size:  200 ;   Accuracy:  44.83%
+Sample size:  300 ;   Accuracy:  56.16%
+Sample size:  400 ;   Accuracy:  57.64%
+Sample size:  500 ;   Accuracy:  66.50%
+Sample size:  600 ;   Accuracy:  65.52%
+Sample size:  700 ;   Accuracy:  74.38%
+Sample size:  800 ;   Accuracy:  75.37%
