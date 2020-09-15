@@ -1,6 +1,7 @@
 # id3-tree
 Please go to my github repository for formatted README file
 https://github.com/clalexni/id3-tree
+
 ### Goal 
 - build ID3 decision tree
 - produce accuracy
@@ -33,6 +34,7 @@ chmod u+x id3_tree.py
 
 ### Learning Curve:
 ![Learning Curve](/outputs/learn.png)
+
 ### Some rule descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
 different classes, then choose the most frequent class (among the instances at the leaf node). 
