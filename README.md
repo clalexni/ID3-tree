@@ -18,6 +18,11 @@ chmod u+x id3_tree.py
 ~~~
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
+  - use the following command to redirect output
+~~~
+./id3_tree.py data/train.dat data/test.dat > out.txt
+~~~
+
 ### Some rule descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
 different classes, then choose the most frequent class (among the instances at the leaf node). 

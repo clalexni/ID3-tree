@@ -195,6 +195,14 @@ def stdout(tree):
           print()
   print_tree(tree, 0)
 
+def accuracy_test(tree, test_examples):
+  """test the accuracy of the tree on the test_examples"""
+  count = 0
+  for ex in examples:
+    if tree(ex) == ex[-1]:
+      count = count + 1
+  return count/len(test_examples)
+
 
 if __name__ == '__main__':
   training_file = sys.argv[1]
@@ -203,8 +211,12 @@ if __name__ == '__main__':
   col_names, examples = parse_data(training_file)
   ds_train = DataSet(examples, col_names)
   tree = id3_tree_learner(ds_train)
+  
   stdout(tree)
+  print('\nAccuracy on training set (', len(examples), ' instances): ',
+        '{:.2%}'.format(accuracy_test(tree, examples)), sep='')
 
 
-
-
+  col_names, examples = parse_data(test_file)
+  print('Accuracy on test set (', len(examples), ' instances): ',
+        '{:.2%}'.format(accuracy_test(tree, examples)), sep='')
