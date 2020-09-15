@@ -16,6 +16,11 @@
 chmod u+x id3_tree.py
 ~~~
 ~~~
+./id3_tree.py [input1] [input2]
+~~~
+
+  - for instance: 
+~~~
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
   - use the following command to redirect output
