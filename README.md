@@ -1,4 +1,6 @@
 # id3-tree
+Please go to my github repository for formatted README file
+https://github.com/clalexni/id3-tree
 ### Goal 
 - build ID3 decision tree
 - produce accuracy
