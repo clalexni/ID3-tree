@@ -7,10 +7,15 @@
 ### Requirements:
 - Python3.6
 - data file (path)
-- command line: (take two inputs of path to the data file)
+- command line: 
   - run these two lines to ensure the correct python version
+  - the first line gives user permission to execute the code using shebang style
+  - the second line takes two input of data file path (./data/train.dat for instance)
+    the first input is the training set and the second input should be the test set
 ~~~
 chmod u+x id3_tree.py
+~~~
+~~~
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
 ### Some rule descriptions
