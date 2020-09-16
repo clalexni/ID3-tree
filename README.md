@@ -49,12 +49,12 @@ left-to-right manner)
 ### Terminal Criterias
 1. exmaples have same class:
   - Done
-2. no example left: (meaning there are unused attribute)
+2. no example left: (meaning there are unused attribute) [case1]
   - select most frequent class of the entire dataset
     - If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
 3. no attribute left:
-  - choose the most frequent class of the subset at the leaf node
-    - If classes are equally common at subset, select from the entire dataset
+  - choose the most frequent class of the subset at the leaf node. [case2]
+    - If classes are equally common at subset, select from the entire dataset [case3]
       - If equally common class exists in the entire dataset, break tie class0 > class1 > class2 > ..
 
 
