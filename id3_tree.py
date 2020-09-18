@@ -4,6 +4,10 @@ import math
 from itertools import islice
 import random
 
+case1 = 0
+case2 = 0
+case3 = 0
+
 class DataSet:
   """
   dataset fields:
@@ -82,13 +86,19 @@ def id3_tree_learner(dataset):
   def id3_tree_learning(examples, attr_indices):
     """id3 decision tree algorithm"""
     if len(examples) == 0:
-      return LeafNode(most_frequent_class(dataset.examples)[1])
+      global case1
+      case1 = case1 + 1 #case1
+      return LeafNode(most_frequent_class(dataset.examples)[1]) #mfc of set
     elif len(attr_indices) == 0:
-      classes, class_from_subset = most_frequent_class(examples)
+      classes, class_from_subset = most_frequent_class(examples) #mfc of subset
       if len(classes) == 1:
+        global case2
+        case2 = case2 + 1 #case2
         return LeafNode(class_from_subset)
       elif len(classes) > 1:
-        return LeafNode(most_frequent_class(dataset.examples)[1])
+        global case3
+        case3 = case3 + 1 #case3
+        return LeafNode(most_frequent_class(dataset.examples)[1]) #mfc of set
     elif all_same_class(examples):
       return LeafNode(examples[0][-1])
     else:
@@ -213,6 +223,10 @@ if __name__ == '__main__':
   ds_train = DataSet(examples, col_names)
   tree = id3_tree_learner(ds_train)
   
+  print(case1, case2, case3)
+  
+  
+  '''
   stdout(tree)
   print('\nAccuracy on training set (', len(examples), ' instances): ',
         '{:.2%}'.format(accuracy_test(tree, examples)), sep='')
@@ -231,4 +245,4 @@ if __name__ == '__main__':
     print('Sample size: ', len(sample), '; ', 
           ' Accuracy: ', '{:.2%}'.format(accuracy_test(tree_sample, test_examples)))
 
-
+  '''
