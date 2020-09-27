@@ -1,16 +1,15 @@
 # id3-tree
 
-### Goal 
+## Goal 
 - build ID3 decision tree
 - produce accuracy
 - plot learning curve
 
-### Requirements:
+## Requirements:
 - Install Python 3.6
 - data file (path) for inputs training and test set
 - command line: 
   - run these two lines to ensure the correct python version
-  - the first line gives user permission to execute the code using shebang style
   - the second line takes two input of data file path (./data/train.dat for instance)
     the first input is the training set and the second input should be the test set
 ~~~
@@ -20,20 +19,21 @@ chmod u+x id3_tree.py
 ./id3_tree.py [input1] [input2]
 ~~~
 
-  - for instance: 
+- for instance: 
 ~~~
 ./id3_tree.py data/train.dat data/test.dat
 ~~~
-  - use the following command to redirect output, for example:
+- use the following command to redirect output, for example:
 ~~~
 ./id3_tree.py data/train.dat data/test.dat > out.txt
 ~~~
 - tested on macos/Linux
 
-### Learning Curve:
+## Learning Curve:
 ![Learning Curve](/outputs/learn.png)
 
-### Some rule descriptions
+## Some Personal Notes:
+### Descriptions
 1. When building a decision tree, if you reach a leaf node but still have examples that belong to
 different classes, then choose the most frequent class (among the instances at the leaf node). 
 2. If you reach a leaf node in the decision tree and have no examples left or the examples are equally split
