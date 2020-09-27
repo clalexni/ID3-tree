@@ -223,10 +223,8 @@ if __name__ == '__main__':
   ds_train = DataSet(examples, col_names)
   tree = id3_tree_learner(ds_train)
   
-  print(case1, case2, case3)
+  #print(case1, case2, case3) #TODO debug this ting
   
-  
-  '''
   stdout(tree)
   print('\nAccuracy on training set (', len(examples), ' instances): ',
         '{:.2%}'.format(accuracy_test(tree, examples)), sep='')
@@ -245,4 +243,3 @@ if __name__ == '__main__':
     print('Sample size: ', len(sample), '; ', 
           ' Accuracy: ', '{:.2%}'.format(accuracy_test(tree_sample, test_examples)))
 
-  '''
