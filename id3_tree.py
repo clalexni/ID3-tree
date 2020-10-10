@@ -89,7 +89,9 @@ def id3_tree_learner(dataset):
       global case1
       case1 = case1 + 1 #case1
       return LeafNode(most_frequent_class(dataset.examples)[1]) #mfc of set
-    elif len(attr_indices) == 0:
+    if all_same_class(examples):
+      return LeafNode(examples[0][-1])
+    if len(attr_indices) == 0:
       classes, class_from_subset = most_frequent_class(examples) #mfc of subset
       if len(classes) == 1:
         global case2
@@ -99,15 +101,13 @@ def id3_tree_learner(dataset):
         global case3
         case3 = case3 + 1 #case3
         return LeafNode(most_frequent_class(dataset.examples)[1]) #mfc of set
-    elif all_same_class(examples):
-      return LeafNode(examples[0][-1])
-    else:
-      A = choose_attribute(attr_indices, examples)
-      tree = InternalNode(A, dataset.col_names[A])
-      for (attr_value, exs) in split_by(A, examples):
-        subtree = id3_tree_learning(exs, trim_item(A, attr_indices))
-        tree.add(attr_value, subtree)
-      return tree
+    #recurrsive case
+    A = choose_attribute(attr_indices, examples)
+    tree = InternalNode(A, dataset.col_names[A])
+    for (attr_value, exs) in split_by(A, examples):
+      subtree = id3_tree_learning(exs, trim_item(A, attr_indices))
+      tree.add(attr_value, subtree)
+    return tree
       
   def most_frequent_class(examples):
     """
@@ -152,7 +152,7 @@ def id3_tree_learner(dataset):
     """
     max_ig, indices = 0, []
     for index in attr_indices:
-      ig = entropy(examples) - remainder_entropy(index, examples)
+      ig = entropy(examples) - remainder_entropy(index, examples) #information gain
       if ig > max_ig:
         max_ig = ig
         indices.clear()
@@ -171,7 +171,10 @@ def id3_tree_learner(dataset):
     return entropy
 
   def remainder_entropy(attr_index, examples):
-    """ return children's average entropy based on a split by a specific attribute"""
+    """ 
+    conditional entropy
+    return children's average entropy based on a split by a specific attribute
+    """
     remainder_entropy = 0
     for (v, exs) in split_by(attr_index, examples):
       remainder_entropy = remainder_entropy + (len(exs)/len(examples)) * entropy(exs)
